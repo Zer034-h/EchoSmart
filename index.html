@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pH Calibrator</title>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grid-tabel">
+    <div class="tabel">
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-sync-alt icon-refresh"></i>
+                <span>pH Calibrator</span>
+            </div>
+            <i class="fas fa-cog icon-settings"></i>
+        </div>
+        <div class="display">
+            <span class="ph-value" id="ph-value">Loading...</id=>
+            <span class="raw-text">RAW</span>
+        </div>
+        <div class="grid-colom">
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="ph-label">pH</div>
+                    <input type="number" id="setph" class="ph-box red"></input>
+                <button class="btn" id="setButton">Set !</button>
+            </div>
+                <div class="grid-item">
+                    <i class="fas fa-check-circle icon-check"></i>
+                    <div class="ph-label">tds</div>
+                        <input type="number" id="setph" class="ph-box blue"></input>
+                    <button class="btn" id="setButton">Set !</button>
+            </div>
+                <div class="grid-item">
+                    <i class="fas fa-check-circle icon-check"></i>
+                    <div class="ph-label">suhu air</div>
+                    <input type="number" id="setph" class="ph-box green"></input>
+                    <button class="btn" id="setButton">Set !</button>
+            </div>
+        </div>
+    </div>
+    <div class="tabel">
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-sync-alt icon-refresh"></i>
+                <span>udaraCalibrator</span>
+            </div>
+            <i class="fas fa-cog icon-settings"></i>
+        </div>
+        <div class="display">
+            <span class="ph-value" id="ph-value">Loading...</id=>
+            <span class="raw-text">RAW</span>
+        </div>
+        <div class="grid-colom">
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="ph-label">suhu</div>
+                    <input type="number" id="setph" class="ph-box red"></input>
+                <button class="btn" id="setButton">Set !</button>
+            </div>
+                <div class="grid-item">
+                    <i class="fas fa-check-circle icon-check"></i>
+                    <div class="ph-label">kelembaban</div>
+                        <input type="number" id="setph" class="ph-box blue"></input>
+                    <button class="btn" id="setButton">Set !</button>
+            </div>
+                <div class="grid-item">
+                    <i class="fas fa-check-circle icon-check"></i>
+                    <div class="ph-label">suhu air</div>
+                    <input type="number" id="setph" class="ph-box green"></input>
+                    <button class="btn" id="setButton">Set !</button>
+            </div>
+        </div>
+    </div>
+    <canvas id="myChart" class="grafik"></canvas>
+    <canvas id="myCharta" class="grafik"></canvas>
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
+
