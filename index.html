@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="countainer">
+    <div class="logo">
+        <div class="img-container">
+            <img src="assets/img/tanaman.png">
+        </div>
+        <h1><b>EchoSmart</b></h1>
+    </div>    
     <div class="grid-tabel">
     <div class="tabel">
         <div class="header">
@@ -22,8 +29,14 @@
             <i class="fas fa-cog icon-settings"></i>
         </div>
         <div class="display">
-            <span class="ph-value" id="ph-value">Loading...</id=>
-            <span class="raw-text">RAW</span>
+            <span class="ph-value" id="ph-value">Loading...</span>
+            <span class="raw-text">ph</span>
+            <span class="ph-value" id="tds-value"></span>
+            <span class="raw-text">ppm</span>
+        </div>
+        <div class="display">
+            <span class="ph-value" id="suhua-value">Loading...</span>
+            <span class="raw-text">°C</span>
         </div>
         <div class="grid-colom">
             <div class="grid-item">
@@ -55,8 +68,12 @@
             <i class="fas fa-cog icon-settings"></i>
         </div>
         <div class="display">
-            <span class="ph-value" id="ph-value">Loading...</id=>
-            <span class="raw-text">RAW</span>
+            <span class="ph-value" id="suhuu-value">Loading...</span>
+            <span class="raw-text">°C</span>
+        </div>
+        <div class="display">
+            <span class="ph-value" id="kelembaban-value">Loading...</span>
+            <span class="raw-text">rh</span>
         </div>
         <div class="grid-colom">
             <div class="grid-item">
@@ -65,25 +82,30 @@
                     <input type="number" id="setph" class="ph-box red"></input>
                 <button class="btn" id="setButton">Set !</button>
             </div>
-                <div class="grid-item">
-                    <i class="fas fa-check-circle icon-check"></i>
-                    <div class="ph-label">kelembaban</div>
-                        <input type="number" id="setph" class="ph-box blue"></input>
-                    <button class="btn" id="setButton">Set !</button>
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="ph-label">Data</div>
+                <div class="box-data green">
+                    <span id="ph-valuea"></span>
+                    <span id="suhua-valuea"></span>
+                    <span id="tds-valuea"></span>
+                    <span id="suhuu-valuea"></span>
+                    <span id="kelembaban-valuea"></span>
+                </div>
             </div>
-                <div class="grid-item">
+            <div class="grid-item">
                     <i class="fas fa-check-circle icon-check"></i>
-                    <div class="ph-label">suhu air</div>
-                    <input type="number" id="setph" class="ph-box green"></input>
+                    <div class="ph-label">lembab</div>
+                        <input type="number" id="setph" class="ph-box blue"></input>
                     <button class="btn" id="setButton">Set !</button>
             </div>
         </div>
     </div>
     <canvas id="myChart" class="grafik"></canvas>
-    <canvas id="myCharta" class="grafik"></canvas>
+    
 </div>
 
+</div>
 <script type="module" src="script.js"></script>
 </body>
 </html>
-
