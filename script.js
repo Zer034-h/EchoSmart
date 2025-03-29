@@ -66,10 +66,29 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 //-----------------------kirimdata--------------------------------------//
+var audio = document.getElementById("alert");
 
 function kirimDataKeFirebaseA() {
-    let datasetph = document.getElementById("setph").value;
-
+    let datasetph = parseFloat(document.getElementById("setph").value);
+    if (datasetph >= 20 || datasetph <= 1) {
+        audio = document.getElementById("alert");
+        audio.play();
+        alert("Warning!, nilai tidak boleh lebih dari 20");
+        datasetph = dataset.setph; 
+    }
+    if (datasetph === ""){
+        audio = document.getElementById("alert");
+        audio.play();
+        alert("isi nilai");
+        datasetph = dataset.setph; 
+    }
+    if (typeof datasetph === 'string') {
+        audio = document.getElementById("alert");
+        audio.play();
+        alert("isi nilai dengan angka");
+        datasetph = dataset.setph; 
+    }
+    else {}
     set(ref(database, 'input/setph'), datasetph)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -80,8 +99,26 @@ function kirimDataKeFirebaseA() {
 }
 
 function kirimDataKeFirebaseB() {
-    let datasettds = document.getElementById("settds").value;
-
+    let datasettds = parseFloat(document.getElementById("settds").value);
+    if (datasettds >= 20 || datasettds <= 1) {
+        audio = document.getElementById("alert");
+        audio.play();
+        alert("Warning!, nilai tidak boleh lebih dari 20");
+        datasettds = dataset.settds; 
+    }
+    if (datasettds === ""){
+        audio = document.getElementById("alert");
+        audio.play();
+        alert("isi nilai");
+        datasettds = dataset.settds; 
+    }
+    if (typeof datasettds === 'string') {
+        audio = document.getElementById("alert");
+        audio.play();
+        alert("isi nilai dengan angka");
+        datasettds = dataset.settds; 
+    }
+    else {}
     set(ref(database, 'input/settds'), datasettds)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -93,7 +130,12 @@ function kirimDataKeFirebaseB() {
 
 function kirimDataKeFirebaseC() {
     let datasuhuair = document.getElementById("setsuhuair").value;
-
+    if (datasuhuair >= 20) {
+        datasuhuair = 20;
+        var audio = document.getElementById("alert");
+        audio.play();
+        alert("Warning!, nilai tidak boleh lebih dari 20");
+    }else {}
     set(ref(database, 'input/setsuhuair'), datasuhuair)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -105,7 +147,12 @@ function kirimDataKeFirebaseC() {
 
 function kirimDataKeFirebaseD() {
     let datasuhuudara = document.getElementById("setsuhuudara").value;
-
+    if (datasuhuudara >= 20) {
+        datasuhuudara = 20;
+        var audio = document.getElementById("alert");
+        audio.play();
+        alert("Warning!, nilai tidak boleh lebih dari 20");
+    }else {}
     set(ref(database, 'input/setsuhuudara'), datasuhuudara)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -116,8 +163,13 @@ function kirimDataKeFirebaseD() {
 }
 
 function kirimDataKeFirebaseE() {
-    let datakelembaban = document.getElementById("setkelembaban").value;
-
+    let datakelembaban = parseFloat(document.getElementById("setkelembaban").value);
+    if (datakelembaban >= 20) {
+        datakelembaban = 20;
+        var audio = document.getElementById("alert");
+        audio.play();
+        alert("Warning!, nilai tidak boleh lebih dari 20");
+    }else {}
     set(ref(database, 'input/setkelembaban'), datakelembaban)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -126,6 +178,7 @@ function kirimDataKeFirebaseE() {
             console.error("Gagal mengirim data:", error);
         });
 }
+
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
