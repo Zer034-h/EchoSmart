@@ -18,20 +18,109 @@ const database = getDatabase(app);
 
 document.addEventListener("DOMContentLoaded", function() {
     // Ambil tombol berdasarkan ID
-    let tombolKirim = document.getElementById("setButton");
+    let tombolKirimA = document.getElementById("setButtonA");
 
     // Tambahkan event listener untuk klik
-    tombolKirim.addEventListener("click", function() {
-        kirimDataKeFirebase(); // Panggil fungsi saat tombol ditekan
+    tombolKirimA.addEventListener("click", function() {
+        kirimDataKeFirebaseA(); // Panggil fungsi saat tombol ditekan
     });
 });
 
-function kirimDataKeFirebase() {
+document.addEventListener("DOMContentLoaded", function() {
+    // Ambil tombol berdasarkan ID
+    let tombolKirimB = document.getElementById("setButtonB");
+
+    // Tambahkan event listener untuk klik
+    tombolKirimB.addEventListener("click", function() {
+        kirimDataKeFirebaseB(); // Panggil fungsi saat tombol ditekan
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Ambil tombol berdasarkan ID
+    let tombolKirimC = document.getElementById("setButtonC");
+
+    // Tambahkan event listener untuk klik
+    tombolKirimC.addEventListener("click", function() {
+        kirimDataKeFirebaseC(); // Panggil fungsi saat tombol ditekan
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Ambil tombol berdasarkan ID
+    let tombolKirimD= document.getElementById("setButtonD");
+
+    // Tambahkan event listener untuk klik
+    tombolKirimD.addEventListener("click", function() {
+        kirimDataKeFirebaseD(); // Panggil fungsi saat tombol ditekan
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Ambil tombol berdasarkan ID
+    let tombolKirimE = document.getElementById("setButtonE");
+
+    // Tambahkan event listener untuk klik
+    tombolKirimE.addEventListener("click", function() {
+        kirimDataKeFirebaseE(); // Panggil fungsi saat tombol ditekan
+    });
+});
+//-----------------------kirimdata--------------------------------------//
+
+function kirimDataKeFirebaseA() {
     let datasetph = document.getElementById("setph").value;
 
     set(ref(database, 'input/setph'), datasetph)
         .then(() => {
-            console.log("Data random berhasil dikirim:",database);
+            console.log("Data berhasil dikirim:",database);
+        })
+        .catch((error) => {
+            console.error("Gagal mengirim data:", error);
+        });
+}
+
+function kirimDataKeFirebaseB() {
+    let datasettds = document.getElementById("settds").value;
+
+    set(ref(database, 'input/settds'), datasettds)
+        .then(() => {
+            console.log("Data berhasil dikirim:",database);
+        })
+        .catch((error) => {
+            console.error("Gagal mengirim data:", error);
+        });
+}
+
+function kirimDataKeFirebaseC() {
+    let datasuhuair = document.getElementById("setsuhuair").value;
+
+    set(ref(database, 'input/setsuhuair'), datasuhuair)
+        .then(() => {
+            console.log("Data berhasil dikirim:",database);
+        })
+        .catch((error) => {
+            console.error("Gagal mengirim data:", error);
+        });
+}
+
+function kirimDataKeFirebaseD() {
+    let datasuhuudara = document.getElementById("setsuhuudara").value;
+
+    set(ref(database, 'input/setsuhuudara'), datasuhuudara)
+        .then(() => {
+            console.log("Data berhasil dikirim:",database);
+        })
+        .catch((error) => {
+            console.error("Gagal mengirim data:", error);
+        });
+}
+
+function kirimDataKeFirebaseE() {
+    let datakelembaban = document.getElementById("setkelembaban").value;
+
+    set(ref(database, 'input/setkelembaban'), datakelembaban)
+        .then(() => {
+            console.log("Data berhasil dikirim:",database);
         })
         .catch((error) => {
             console.error("Gagal mengirim data:", error);
@@ -44,72 +133,47 @@ const myChart = new Chart(ctx, {
     data: {
         labels: [], // Label kosong akan diisi dengan data real-time
         datasets: [
-            {
-                label: 'pH',
-                data: [1],
-                borderColor: 'blue',
-                fill: false,
-                tension: 0.1
-            },
-            {
-                label: ' °C',
-                data: [2],
-                borderColor: 'red',
-                fill: false,
-                tension: 0.1
-            },
-            {
-                label: 'ppm',
-                data: [3],
-                borderColor: 'green',
-                fill: false,
-                tension: 0.1
-            },
-            {
-                label: 'suhuu',
-                data: [4],
-                borderColor: 'orange',
-                fill: false,
-                tension: 0.1
-            },
-            {
-                label: 'kelembaban',
-                data: [5],
-                borderColor: 'brown',
-                fill: false,
-                tension: 0.1
-            }
+            {label: 'pH', data: [1], borderColor: 'blue', fill: false, tension: 0.1},
+            {label: ' °C',data: [2],borderColor: 'red',fill: false,tension: 0.1},
+            {label: 'ppm',data: [3],borderColor: 'green',fill: false,tension: 0.1},
+            {label: ' °C',data: [4],borderColor: 'orange',fill: false,tension: 0.1},
+            {label: 'rH',data: [5],borderColor: 'brown',fill: false,tension: 0.1}
         ]
     },
     options: {
-        scales: {
-            x: {
-                title: {
-                    display: false,
-                    text: 'Waktu'
+        scales: {x: {title: {display: false,text: 'Waktu'}},
+                 y: {title: {display: false,text: 'Nilai'}}
                 }
-            },
-            y: {
-                title: {
-                    display: false,
-                    text: 'Nilai'
-                }
-            }
-        }
-    }
+             }
 });
 
 
+function updateSetData(snapshotA) {
+    const dataset= snapshotA.val();
+
+    document.getElementById('setph-value').innerText = dataset.setph || 'N/A';
+    document.getElementById('settds-value').innerText = dataset.settds || 'N/A';
+    document.getElementById('setsuhua-value').innerText = dataset.setsuhuair || 'N/A';
+    document.getElementById('setsuhuu-value').innerText = dataset.setsuhuudara || 'N/A';
+    document.getElementById('setkelembaban-value').innerText = dataset.setkelembaban|| 'N/A';
+}
 
 function updateSensorData(snapshot) {
     const data = snapshot.val();
     
     // Perbarui nilai sensor di halaman
+    document.getElementById('setph-value').innerText = data.ph || 'N/A';
+    document.getElementById('settds-value').innerText = data.tds || 'N/A';
+    document.getElementById('setuhua-value').innerText = data.suhuair || 'N/A';
+    document.getElementById('setsuhuu-value').innerText = data.suhuudara || 'N/A';
+    document.getElementById('setkelembaban-value').innerText = data.kelembaban|| 'N/A';
+    /*
     document.getElementById('ph-value').innerText = data.ph || 'N/A';
     document.getElementById('tds-value').innerText = data.tds || 'N/A';
     document.getElementById('suhua-value').innerText = data.suhuair || 'N/A';
     document.getElementById('suhuu-value').innerText = data.suhuudara || 'N/A';
     document.getElementById('kelembaban-value').innerText = data.kelembaban|| 'N/A';
+    */
     document.getElementById('ph-valuea').innerText = data.ph || 'N/A';
     document.getElementById('tds-valuea').innerText = data.tds || 'N/A';
     document.getElementById('suhua-valuea').innerText = data.suhuair || 'N/A';
@@ -165,6 +229,13 @@ tampilkanWaktuInternet();
 const sensorRef = ref(database, 'sensor');
 onValue(sensorRef, (snapshot) => {
     updateSensorData(snapshot);
+}, (error) => {
+    console.error("Error fetching data: ", error);
+});
+
+const datasetRef = ref(database, 'input');
+onValue(datasetRef, (snapshotA) => {
+    updateSetData(snapshotA);
 }, (error) => {
     console.error("Error fetching data: ", error);
 });
