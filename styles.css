@@ -20,6 +20,47 @@ body {
     max-height: 420px;
 }
 
+.tabel-control {
+    margin: auto;
+    background-color: #ffffff00;
+    border-radius: 16px;
+    width: 320px;
+    max-width: 320px;
+    max-height: 420px;
+}
+
+.item-controlA {
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: end;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.text-control {
+    text-align: center;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.text-control h1{
+    color: #10b981;
+}
+
+
+.item-controlB {
+    
+}
+
+.item-controlC {
+    
+}
+
 .grafik {
     margin: auto;
     background-color: #ffffff;
@@ -139,6 +180,7 @@ body {
     font-weight: 700;
     color: #4a4a4a;
     overflow: scroll;
+    min-height: auto;
     max-height: 53px;
     max-width: 80px;
 }
