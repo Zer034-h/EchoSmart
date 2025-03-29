@@ -70,25 +70,12 @@ var audio = document.getElementById("alert");
 
 function kirimDataKeFirebaseA() {
     let datasetph = parseFloat(document.getElementById("setph").value);
-    if (datasetph >= 20 || datasetph <= 1) {
+    if (datasetph >= 20 || datasetph <= 1 || datasetph == "" || typeof datasetph == "string") {
         audio = document.getElementById("alert");
         audio.play();
         alert("Warning!, nilai tidak boleh lebih dari 20");
         datasetph = dataset.setph; 
-    }
-    if (datasetph === ""){
-        audio = document.getElementById("alert");
-        audio.play();
-        alert("isi nilai");
-        datasetph = dataset.setph; 
-    }
-    if (typeof datasetph === 'string') {
-        audio = document.getElementById("alert");
-        audio.play();
-        alert("isi nilai dengan angka");
-        datasetph = dataset.setph; 
-    }
-    else {}
+    }else{}
     set(ref(database, 'input/setph'), datasetph)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -100,25 +87,12 @@ function kirimDataKeFirebaseA() {
 
 function kirimDataKeFirebaseB() {
     let datasettds = parseFloat(document.getElementById("settds").value);
-    if (datasettds >= 20 || datasettds <= 1) {
+    if (datasettds >= 20 || datasettds <= 1 || datasettds == "" || typeof datasettds == "string") {
         audio = document.getElementById("alert");
         audio.play();
         alert("Warning!, nilai tidak boleh lebih dari 20");
         datasettds = dataset.settds; 
-    }
-    if (datasettds === ""){
-        audio = document.getElementById("alert");
-        audio.play();
-        alert("isi nilai");
-        datasettds = dataset.settds; 
-    }
-    if (typeof datasettds === 'string') {
-        audio = document.getElementById("alert");
-        audio.play();
-        alert("isi nilai dengan angka");
-        datasettds = dataset.settds; 
-    }
-    else {}
+    }else{}
     set(ref(database, 'input/settds'), datasettds)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -129,13 +103,13 @@ function kirimDataKeFirebaseB() {
 }
 
 function kirimDataKeFirebaseC() {
-    let datasuhuair = document.getElementById("setsuhuair").value;
-    if (datasuhuair >= 20) {
-        datasuhuair = 20;
-        var audio = document.getElementById("alert");
+    let datasuhuair = parseFloat(document.getElementById("setsuhuair").value);
+    if (datasuhuair >= 20 || datasuhuair <= 1 || datasuhuair == "" || typeof datasuhuair == "string") {
+        audio = document.getElementById("alert");
         audio.play();
         alert("Warning!, nilai tidak boleh lebih dari 20");
-    }else {}
+        datasuhuair = dataset.setsuhuair; 
+    }else{}
     set(ref(database, 'input/setsuhuair'), datasuhuair)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -146,13 +120,13 @@ function kirimDataKeFirebaseC() {
 }
 
 function kirimDataKeFirebaseD() {
-    let datasuhuudara = document.getElementById("setsuhuudara").value;
-    if (datasuhuudara >= 20) {
-        datasuhuudara = 20;
-        var audio = document.getElementById("alert");
+    let datasuhuudara = parseFloat(document.getElementById("setsuhuudara").value);
+    if (datasuhuudara >= 20 || datasuhuudara <= 1 || datasuhuudara == "" || typeof datasuhuudara == "string") {
+        audio = document.getElementById("alert");
         audio.play();
         alert("Warning!, nilai tidak boleh lebih dari 20");
-    }else {}
+        datasuhuudara= dataset.setsuhuudara; 
+    }else{}
     set(ref(database, 'input/setsuhuudara'), datasuhuudara)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
@@ -164,12 +138,12 @@ function kirimDataKeFirebaseD() {
 
 function kirimDataKeFirebaseE() {
     let datakelembaban = parseFloat(document.getElementById("setkelembaban").value);
-    if (datakelembaban >= 20) {
-        datakelembaban = 20;
-        var audio = document.getElementById("alert");
+    if (datakelembaban >= 20 || datakelembaban <= 1 || datakelembaban == "" || typeof datakelembaban == "string") {
+        audio = document.getElementById("alert");
         audio.play();
         alert("Warning!, nilai tidak boleh lebih dari 20");
-    }else {}
+        datakelembaban= dataset.setsuhuair; 
+    }else{}
     set(ref(database, 'input/setkelembaban'), datakelembaban)
         .then(() => {
             console.log("Data berhasil dikirim:",database);
