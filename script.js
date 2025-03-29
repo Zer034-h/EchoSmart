@@ -160,13 +160,6 @@ function updateSetData(snapshotA) {
 
 function updateSensorData(snapshot) {
     const data = snapshot.val();
-    
-    // Perbarui nilai sensor di halaman
-    document.getElementById('setph-value').innerText = data.ph || 'N/A';
-    document.getElementById('settds-value').innerText = data.tds || 'N/A';
-    document.getElementById('setuhua-value').innerText = data.suhuair || 'N/A';
-    document.getElementById('setsuhuu-value').innerText = data.suhuudara || 'N/A';
-    document.getElementById('setkelembaban-value').innerText = data.kelembaban|| 'N/A';
     /*
     document.getElementById('ph-value').innerText = data.ph || 'N/A';
     document.getElementById('tds-value').innerText = data.tds || 'N/A';
