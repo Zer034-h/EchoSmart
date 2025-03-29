@@ -73,7 +73,7 @@ function kirimDataKeFirebaseA() {
     if (datasetph >= 20 || datasetph <= 1 || datasetph == "" || typeof datasetph == "string") {
         audio = document.getElementById("alert");
         audio.play();
-        alert("Warning!, nilai tidak boleh lebih dari 20");
+        alert("⚠️‼️WARNING‼️⚠️");
         datasetph = dataset.setph; 
     }else{}
     set(ref(database, 'input/setph'), datasetph)
@@ -90,7 +90,7 @@ function kirimDataKeFirebaseB() {
     if (datasettds >= 20 || datasettds <= 1 || datasettds == "" || typeof datasettds == "string") {
         audio = document.getElementById("alert");
         audio.play();
-        alert("Warning!, nilai tidak boleh lebih dari 20");
+        alert("⚠️‼️WARNING‼️⚠️");
         datasettds = dataset.settds; 
     }else{}
     set(ref(database, 'input/settds'), datasettds)
@@ -107,7 +107,7 @@ function kirimDataKeFirebaseC() {
     if (datasuhuair >= 20 || datasuhuair <= 1 || datasuhuair == "" || typeof datasuhuair == "string") {
         audio = document.getElementById("alert");
         audio.play();
-        alert("Warning!, nilai tidak boleh lebih dari 20");
+        alert("⚠️‼️WARNING‼️⚠️");
         datasuhuair = dataset.setsuhuair; 
     }else{}
     set(ref(database, 'input/setsuhuair'), datasuhuair)
@@ -124,7 +124,7 @@ function kirimDataKeFirebaseD() {
     if (datasuhuudara >= 20 || datasuhuudara <= 1 || datasuhuudara == "" || typeof datasuhuudara == "string") {
         audio = document.getElementById("alert");
         audio.play();
-        alert("Warning!, nilai tidak boleh lebih dari 20");
+        alert("⚠️‼️WARNING‼️⚠️");
         datasuhuudara= dataset.setsuhuudara; 
     }else{}
     set(ref(database, 'input/setsuhuudara'), datasuhuudara)
@@ -141,7 +141,7 @@ function kirimDataKeFirebaseE() {
     if (datakelembaban >= 20 || datakelembaban <= 1 || datakelembaban == "" || typeof datakelembaban == "string") {
         audio = document.getElementById("alert");
         audio.play();
-        alert("Warning!, nilai tidak boleh lebih dari 20");
+        alert("⚠️‼️WARNING‼️⚠️");
         datakelembaban= dataset.setsuhuair; 
     }else{}
     set(ref(database, 'input/setkelembaban'), datakelembaban)
