@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EchoSmart Display</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/stylesDispaly.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="oneTag"  data-aos="zoom-in" data-aos-duration="1500">
+            <i class="fas fa-atom icon"></i>
+            <div class="logo">
+                Echo<span>Smart</span>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <input type="checkbox"/>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="menu_list"> 
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a
+                    href="index.html">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a
+                    href="control.html">Control</a></div>
+                <div class="link  active" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a
+                    href="display.html">Display</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a
+                    href="info.html">info</a></div>
+        </ul>
+    </nav>
+
+<div class="countainer">  
+    <div class="grid-tabel">
+        <div class="tabel" data-aos="zoom-in" data-aos-duration="3000">
+            <div class="header">
+                <div class="title">
+                    <i class="fas fa-sync-alt icon-refresh"></i>
+                    <span>Data Numerik</span>
+                </div>
+            </div>
+            <div class="displayMonitor">
+                <span class="value" id="ph-value">Loading...</span>
+                <span class="raw-text">ph</span>
+            </div>
+            <div class="displayMonitor">
+                <span class="value" id="tds-value">Loading...</span>
+                <span class="raw-text">ppm</span>
+            </div>
+            <div class="displayMonitor">
+                <span class="value" id="suhua-value">Loading...</span>
+                <span class="raw-text"> °C</span>
+            </div>
+            <div class="displayMonitor">
+                <span class="value" id="suhuu-value">Loading...</span>
+                <span class="raw-text"> °C</span>
+            </div>
+            <div class="displayMonitor">
+                <span class="value" id="kelembaban-value">Loading...</span>
+                <span class="raw-text">rh</span>
+            </div>
+        </div>
+
+        <div class="tabel" data-aos="zoom-in" data-aos-duration="3000">
+            <div class="header">
+                <div class="title">
+                    <i class="fas fa-sync-alt icon-refresh"></i>
+                    <span>Data Persentase</span>
+                </div>
+            </div>
+            <div class="grid-colombar">
+                <div class="grid-item">
+                    <div class="label">pH</div>
+                    <div class="bar">
+                        <div class="fill" id="phbar" style="background: rgb(255, 0, 0); height: 0%;">0%</div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="label">Tds</div>
+                    <div class="bar">
+                        <div class="fill" id="tdsbar" style="background: rgb(9, 255, 0); height: 0%;">0%</div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="label">Suhu A</div>
+                    <div class="bar">
+                        <div class="fill" id="airbar" style="background: rgb(251, 255, 0); height: 0%;">0%</div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="label">Suhu U</div>
+                    <div class="bar">
+                        <div class="fill" id="udarabar" style="background: rgb(255, 145, 0); height: 0%;">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-colombarbawah">
+            <div class="grid-item">
+                <div class="label">rH</div>
+                <div class="bar">
+                    <div class="fill" id="kelembabanbar" style="background: rgb(0, 4, 255); height: 0%;">0%</div>
+                </div>
+            </div>
+
+            <div><h1>environmentally friendly smart agriculture</h1></div>
+        </div>
+        </div>
+        
+        <div class="tabel" data-aos="zoom-in" data-aos-duration="3000">
+            <div class="header">
+                <div class="title">
+                    <i class="fas fa-sync-alt icon-refresh"></i>
+                    <span>Data Grafik </span>
+                </div>
+            </div>
+        <canvas id="myChart" width="400" height="500"></canvas>
+        </div>
+</div>
+
+<script type="module" src="js/scriptDisplay.js"></script>
+<script type="module" src="js/data.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>AOS.init({ offset: 0, });</script>
+</body>
+</html>

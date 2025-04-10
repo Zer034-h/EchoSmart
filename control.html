@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoSmart Control</title>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/stylesDispaly.css">
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="oneTag"  data-aos="zoom-in" data-aos-duration="1500">
+            <i class="fas fa-atom icon"></i>
+            <div class="logo">
+                Echo<span>Smart</span>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <input type="checkbox"/>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="menu_list"> 
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a
+                        href="index.html">Home</a></div>
+                <div class="link active" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a
+                        href="control.html">Control</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a
+                        href="display.html">Display</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a
+                        href="info.html">Info</a></div>
+        </ul>
+    </nav>
+<div class="countainer">  
+    <div class="grid-tabel">
+    <div class="tabel" data-aos="zoom-in" data-aos-duration="3000">
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-sync-alt icon-refresh"></i>
+                <span>pH Calibrator</span>
+            </div>
+        </div>
+        <div class="display">
+            <span class="value" id="setPhDownValue">Loading...</span>
+            <h1 class="value">></h1>
+            <span class="value" id="setPhUpValue"></span>
+            <span class="raw-text">ph</span>
+        </div>
+        <div class="display">
+            <span class="value" id="setTdsDownValue">Loading...</span>
+            <h1 class="value">></h1>
+            <span class="value" id="setTdsUpValue"></span>
+            <span class="raw-text">ppm</span>
+        </div>
+        <div class="grid-colom">
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="label">pH</div>
+                    <input type="number" id="setPh" class="ph-box red"></input>
+                <button class="btn" id="setButtonA">Set !</button>
+            </div>
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="label">Rentang</div>
+                <div class="box-batas">
+                    <button class="btn" id="setButtonUpA">⬆</button>
+                    <button class="btn" id="setButtonDownA">⬇</button>
+                </div>
+            </div>
+            <div class="grid-item">
+                    <i class="fas fa-check-circle icon-check"></i>
+                    <div class="label">tds</div>
+                        <input type="number" id="setTds" class="ph-box blue"></input>
+                    <button class="btn" id="setButtonB">Set !</button>
+            </div>
+        </div>
+    </div>
+    <div class="tabel" data-aos="zoom-in" data-aos-duration="3000">
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-sync-alt icon-refresh"></i>
+                <span>udara Calibrator</span>
+            </div>
+        </div>
+        <div class="display">
+            <span class="value" id="setSuhuDownValue">Loading...</span>
+            <h1 class="value">></h1>
+            <span class="value" id="setSuhuUpValue"></span>
+            <span class="raw-text">°C</span>
+        </div>
+        <div class="display">
+            <span class="value" id="setKelembabanDownValue">Loading...</span>
+            <h1 class="value">></h1>
+            <span class="value" id="setKelembabanUpValue"></span>
+            <span class="raw-text">rh</span>
+        </div>
+        <div class="grid-colom">
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="label">suhu</div>
+                    <input type="number" id="setSuhu" class="ph-box red"></input>
+                <button class="btn" id="setButtonD">Set !</button>
+            </div>
+            <div class="grid-item">
+                <i class="fas fa-check-circle icon-check"></i>
+                <div class="label">Rentang</div>
+                <div class="box-batas">
+                    <button class="btn" id="setButtonUpB">⬆</button>
+                    <button class="btn" id="setButtonDownB">⬇</button>
+                </div>
+            </div>
+            <div class="grid-item">
+                    <i class="fas fa-check-circle icon-check"></i>
+                    <div class="label">lembab</div>
+                        <input type="number" id="setKelembaban" class="ph-box blue"></input>
+                    <button class="btn" id="setButtonE">Set !</button>
+            </div>
+        </div>
+    </div>
+    <div data-aos="zoom-in" data-aos-duration="3000">
+        <div class="item-controlA">
+            <button class="btn" id="btnoa"><</button>
+            <div class="text-control">
+                <span id="modeA"></span>
+                <p1>mode</p1>
+            </div>
+            <button class="btn" id="btnob">></button>
+        </div>
+        <div class="item-controlB" id="javaCss">
+            <div class="grid-item">
+            <div class="label">⬆</div>
+            <label class="switch">
+                <input type="checkbox" id="checkbox1">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="grid-item">
+            <div class="label">⬇</div>
+            <label class="switch">
+                <input type="checkbox" id="checkbox2">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="grid-item">
+            <div class="label">A</div>
+            <label class="switch">
+                <input type="checkbox" id="checkbox3">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="grid-item">
+            <div class="label">B</div>
+            <label class="switch">
+                <input type="checkbox" id="checkbox4">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        </div>
+        <div class="item-controlC">
+            <div class="grid-item">
+                <div class="label">pH</div>
+                <div class="bar">
+                    <div class="fill" id="phbar" style="background: rgb(255, 0, 0); height: 0%;">0%</div>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="label">Tds</div>
+                <div class="bar">
+                    <div class="fill" id="tdsbar" style="background: rgb(9, 255, 0); height: 0%;">0%</div>
+                </div>
+            </div>
+            <div class="grid-item-time">
+                <div class="label">UV</div>
+                <div class="time">
+                    <span id="time">time</span>
+                    <div class="raw-text">s</div>
+                </div>
+                <div class="btncontrolled">
+                    <div>
+                        <button class="btn" id="btnoc"><</button>
+                        <button class="btn" id="btnod">></button>
+                    </div>
+                    <div class="strend">
+                    <button class="btn" id="startTimeButton">STR</button>
+                    <button class="btn" id="endTimeButton">END</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-controlD">
+            <div class="grid-item">
+            <div class="label">☁️</div>
+            <button class="btn" id="humidtyButton"><Span id="btnhumidity"></Span></button>
+            </div>
+        <div class="grid-item">
+            <div class="label">🌱</div>
+            <button class="btn" id="peptisidaButton"><Span id="btnpeptisida"></Span></button>
+            </div>
+        <div class="grid-item">
+            <div class="label">🔐</div>
+            <button class="btn" id="keamananButton"><Span id="btnkeamanan"></Span></button>
+            </div>
+        <div class="grid-item">
+            <div class="label">💨</div>
+            <button class="btn" id="kipasButton"><Span id="btnangin"></Span></button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+<audio id="alert" src="assets/mp3/alert.mp3" preload="auto"></audio>
+<audio id="audioAuto" src="assets/mp3/auto.mp3" preload="auto"></audio>
+<audio id="audioManual" src="assets/mp3/manual.mp3" preload="auto"></audio>
+<audio id="audioUp" src="assets/mp3/up.mp3" preload="auto"></audio>
+<audio id="audioLow" src="assets/mp3/low.mp3" preload="auto"></audio>
+<audio id="audioPump" src="assets/mp3/pump.mp3" preload="auto"></audio>
+<script type="module" src="js/script.js"></script>
+<script type="module" src="js/scriptDisplay.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>AOS.init({ offset: 0, });</script>
+</body>
+</html>
