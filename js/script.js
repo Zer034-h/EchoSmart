@@ -23,10 +23,6 @@ const checkboxSet4 = document.getElementById("checkbox4");
 
 let countdownInterval;
 let isActive = false;
-let played1 = false;
-let played2 = false;
-let played3 = false;
-let played4 = false;
 var nilaiph;
 var nilaitds;
 var Mode;
@@ -51,6 +47,8 @@ var audiomanuala = document.getElementById("audioManual");
 var audioUp = document.getElementById("audioUp");
 var audioLow = document.getElementById("audioLow");
 var audioPump = document.getElementById("audioPump");
+var binaryOutput;
+var bits = [false, false, false, false, false, false, false, false];
 
 //-----------------------GetDataBase--------------------------------------//
 
@@ -80,40 +78,6 @@ function updateSensorData(snapshot) {
 
     setBarph(nilaiph);
     setBartds(nilaitds);
-    /*
-    document.getElementById('ph-value').innerText = data.ph || 'N/A';
-    document.getElementById('tds-value').innerText = data.tds || 'N/A';
-    document.getElementById('suhua-value').innerText = data.suhuair || 'N/A';
-    document.getElementById('suhuu-value').innerText = data.suhuudara || 'N/A';
-    document.getElementById('kelembaban-value').innerText = data.kelembaban|| 'N/A';
-    
-    document.getElementById('ph-valuea').innerText = data.ph || 'N/A';
-    document.getElementById('tds-valuea').innerText = data.tds || 'N/A';
-    document.getElementById('suhua-valuea').innerText = data.suhuair || 'N/A';
-    document.getElementById('suhuu-valuea').innerText = data.suhuudara || 'N/A';
-    document.getElementById('kelembaban-valuea').innerText = data.kelembaban|| 'N/A';
-    
-    
-    // Tambahkan label waktu
-    const timestamp = new Date().toLocaleTimeString();
-    myChart.data.labels.push(timestamp);
-    
-    // Perbarui dataset dengan nilai baru
-    myChart.data.datasets[0].data.push(data.ph);
-    myChart.data.datasets[1].data.push(data.suhuair);
-    myChart.data.datasets[2].data.push(data.tds);
-    myChart.data.datasets[3].data.push(data.suhuudara);
-    myChart.data.datasets[4].data.push(data.kelembaban);
-    
-    // Batasi jumlah data yang ditampilkan (misal 10 data terakhir)
-    if (myChart.data.labels.length > 10) {
-        myChart.data.labels.shift();
-        myChart.data.datasets.forEach(dataset => dataset.data.shift());
-    }
-    
-    // Perbarui chart
-    myChart.update();
-    */
 }
 
 function updateSetData(snapshotA) {
@@ -155,17 +119,81 @@ function operatormanual(snapshotC) {
     checkboxSet3.checked = Manual.pompa3;
     checkboxSet4.checked = Manual.pompa4;
 
+    bits[0]=Manual.pompa1;
+    bits[1]=Manual.pompa2;
+    bits[2]=Manual.pompa3;
+    bits[3]=Manual.pompa4;
+
     modehumidity = Manual.modehumidity;
     modepeptisida = Manual.modepeptisida;
     modekeamanan = Manual.modekeamanan;
     modeangin = Manual.modeangin;
 
-    if(modehumidity){document.getElementById("btnhumidity").textContent = "ON";}else{document.getElementById("btnhumidity").textContent = "OFF";}
-    if(modepeptisida){document.getElementById("btnpeptisida").textContent = "ON";}else{document.getElementById("btnpeptisida").textContent = "OFF";}
-    if(modekeamanan){document.getElementById("btnkeamanan").textContent = "ON";}else{document.getElementById("btnkeamanan").textContent = "OFF";}
-    if(modeangin){document.getElementById("btnangin").textContent = "ON";}else{document.getElementById("btnangin").textContent = "OFF";}
+    if(modehumidity){
+        document.getElementById("btnhumidity").textContent = "ON";
+        bits[4]=true; binaryOutput = getBinaryString();
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }else{
+        document.getElementById("btnhumidity").textContent = "OFF"; 
+        bits[4]=false; 
+        binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }
+    if(modepeptisida){
+        document.getElementById("btnpeptisida").textContent = "ON";
+        bits[5]=true; 
+        binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }else{
+        document.getElementById("btnpeptisida").textContent = "OFF"; 
+        bits[5]=false; binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }
+    if(modekeamanan){
+        document.getElementById("btnkeamanan").textContent = "ON"; 
+        bits[6]=true; 
+        binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }else{document.getElementById("btnkeamanan").textContent = "OFF"; 
+        bits[6]=false; 
+        binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }
+    if(modeangin){
+        document.getElementById("btnangin").textContent = "ON"; 
+        bits[7]=true; 
+        binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }else{
+        document.getElementById("btnangin").textContent = "OFF"; 
+        bits[7]=false; 
+        binaryOutput = getBinaryString(); 
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+    }
 }
 
+
+function getBinaryString() {
+    return (
+    (bits[0] ? '1' : '0') +
+    (bits[1] ? '1' : '0') +
+    (bits[2] ? '1' : '0') +
+    (bits[3] ? '1' : '0') +
+    (bits[4] ? '1' : '0') +
+    (bits[5] ? '1' : '0') +
+    (bits[6] ? '1' : '0') +
+    (bits[7] ? '1' : '0') +
+    (bits[8] ? '1' : '0') +
+    ('|')+(setPhUpValue)+
+    ('|')+(setPhDownValue)+
+    ('|')+(setTdsUpValue)+
+    ('|')+(setTdsDownValue)+
+    ('|')+(setSuhuUpValue)+
+    ('|')+(setSuhuDownValue)+
+    ('|')+(setKelembabanUpValue)+
+    ('|')+(setKelembabanDownValue)
+    );
+}
 
 
 //-----------------------HtmlComunicaton--------------------------------------//
@@ -261,32 +289,65 @@ document.addEventListener("DOMContentLoaded", function() {
         if(modehumidity){
             set(ref(database, 'operatorManual/modehumidity'), modehumidity);
             document.getElementById("btnhumidity").textContent = "ON";
-        }else{document.getElementById("btnhumidity").textContent = "OFF";
-            set(ref(database, 'operatorManual/modehumidity'), modehumidity);}
+            bits[4] = true;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+        }else{
+            set(ref(database, 'operatorManual/modehumidity'), modehumidity);
+            document.getElementById("btnhumidity").textContent = "OFF";
+            bits[4] = false;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+            }
+
     });
     h.addEventListener("click", function(){
         modepeptisida = !modepeptisida;
         if(modepeptisida){
             set(ref(database, 'operatorManual/modepeptisida'), modepeptisida);
             document.getElementById("btnpeptisida").textContent = "ON";
-        }else{document.getElementById("btnpeptisida").textContent = "OFF";
-            set(ref(database, 'operatorManual/modepeptisida'), modepeptisida);}
+            bits[5] = true;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+        }else{
+            document.getElementById("btnpeptisida").textContent = "OFF";
+            set(ref(database, 'operatorManual/modepeptisida'), modepeptisida);
+            bits[5] = false;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+            }
     });
     i.addEventListener("click", function(){
         modekeamanan = !modekeamanan;
         if(modekeamanan){
             set(ref(database, 'operatorManual/modekeamanan'), modekeamanan);
             document.getElementById("btnkeamanan").textContent = "ON";
-        }else{document.getElementById("btnkeamanan").textContent = "OFF";
-            set(ref(database, 'operatorManual/modekeamanan'), modekeamanan);}
+            bits[6] = true;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+        }else{
+            document.getElementById("btnkeamanan").textContent = "OFF";
+            set(ref(database, 'operatorManual/modekeamanan'), modekeamanan);
+            bits[6] = false;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+            }
     });
     j.addEventListener("click", function(){
         modeangin = !modeangin;
         if(modeangin){
             set(ref(database, 'operatorManual/modeangin'), modeangin);
             document.getElementById("btnangin").textContent = "ON";
-        }else{document.getElementById("btnangin").textContent = "OFF";
-            set(ref(database, 'operatorManual/modeangin'), modeangin);}
+            bits[7] = true;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+        }else{
+            document.getElementById("btnangin").textContent = "OFF";
+            set(ref(database, 'operatorManual/modeangin'), modeangin);
+            bits[7] = false;
+            binaryOutput = getBinaryString();
+            set(ref(database, 'senddatafiks/all'), binaryOutput);
+            }
     });
     BtnDownA.addEventListener("click", function(){
         RentangA = false;
@@ -310,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
 function updateMode() {
     if (Mode) {
         document.getElementById("modeA").textContent = "Manual";
@@ -317,12 +379,20 @@ function updateMode() {
         set(ref(database, 'operator/Mode'), Mode)
         .then(() => {console.log("Data berhasil dikirim:",database);})
         .catch((error) => {console.error("Gagal mengirim data:", error);});
+        bits[8] = true;
+        binaryOutput = getBinaryString();
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
     }else{
         document.getElementById("modeA").textContent = "Auto";
         javaCss.style.backgroundColor = '#cecece';
         set(ref(database, 'operator/Mode'), Mode)
         .then(() => {console.log("Data berhasil dikirim:",database);})
         .catch((error) => {console.error("Gagal mengirim data:", error);});
+
+        bits[8] = false;
+        binaryOutput = getBinaryString();
+        set(ref(database, 'senddatafiks/all'), binaryOutput);
+
         checkboxSet1.checked = false;
         checkboxSet2.checked = false;
         checkboxSet3.checked = false;
@@ -347,10 +417,22 @@ document.getElementById('checkbox1').addEventListener('change', function() {
     if(checkbox1)audioPump.play();
     if (this.checked) {
         set(ref(database, 'operatorManual/pompa1'), checkbox1);
+        bits[0] = true;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     } else {
         set(ref(database, 'operatorManual/pompa1'), checkbox1);
+        bits[0] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     }
-    }else{checkboxSet1.checked = false; set(ref(database, 'operatorManual/pompa1'), false);}
+    }else{
+        checkboxSet1.checked = false; 
+        set(ref(database, 'operatorManual/pompa1'), false);
+        bits[0] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
+    }
 });
 
 document.getElementById('checkbox2').addEventListener('change', function() {
@@ -359,10 +441,21 @@ document.getElementById('checkbox2').addEventListener('change', function() {
     if(checkbox2)audioPump.play();
     if (this.checked) {
         set(ref(database, 'operatorManual/pompa2'), checkbox2);
+        bits[1] = true;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     } else {
         set(ref(database, 'operatorManual/pompa2'), checkbox2);
+        bits[1] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     }
-    }else{checkboxSet2.checked = false; set(ref(database, 'operatorManual/pompa2'), false);}
+    }else{checkboxSet2.checked = false; 
+        set(ref(database, 'operatorManual/pompa2'), false);
+        bits[1] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
+    }
 });
 
 document.getElementById('checkbox3').addEventListener('change', function() {
@@ -371,10 +464,21 @@ document.getElementById('checkbox3').addEventListener('change', function() {
     if(checkbox3)audioPump.play();
     if (this.checked) {
         set(ref(database, 'operatorManual/pompa3'), checkbox3);
+        bits[2] = true;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     } else {
         set(ref(database, 'operatorManual/pompa3'), checkbox3);
+        bits[2] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     }
-    }else{checkboxSet3.checked = false; set(ref(database, 'operatorManual/pompa3'), false);}
+    }else{checkboxSet3.checked = false; 
+        set(ref(database, 'operatorManual/pompa3'), false);
+        bits[2] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
+    }
 });
 
 document.getElementById('checkbox4').addEventListener('change', function() {
@@ -383,10 +487,21 @@ document.getElementById('checkbox4').addEventListener('change', function() {
     if(checkbox4)audioPump.play();
     if (this.checked) {
         set(ref(database, 'operatorManual/pompa4'), checkbox4);
+        bits[3] = true;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     } else {
         set(ref(database, 'operatorManual/pompa4'), checkbox4);
+        bits[3] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
     }
-    }else{checkboxSet4.checked = false; set(ref(database, 'operatorManual/pompa4'), false);}
+    }else{checkboxSet4.checked = false; 
+        set(ref(database, 'operatorManual/pompa4'), false);
+        bits[3] = false;
+        let binaryOutput = getBinaryString();
+        console.log(binaryOutput);
+    }
 });
 
 
@@ -423,6 +538,8 @@ var setPh = parseFloat(document.getElementById("setPh").value);
                 set(ref(database, 'input/setPhUp'), setPh)
                 .then(() => {console.log("Data berhasil dikirim:", database);})
                 .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         }
     }else{
@@ -439,6 +556,8 @@ var setPh = parseFloat(document.getElementById("setPh").value);
                 set(ref(database, 'input/setPhDown'), setPh)
                 .then(() => {console.log("Data berhasil dikirim:",database);})
                 .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         } 
     }
@@ -461,7 +580,9 @@ var setTds = parseFloat(document.getElementById("setTds").value);
             }else{
                 set(ref(database, 'input/setTdsUp'), setTds)
                 .then(() => {console.log("Data berhasil dikirim:",database);})
-                .catch((error) => {console.error("Gagal mengirim data:", error);});  
+                .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         }
     }else{
@@ -477,7 +598,9 @@ var setTds = parseFloat(document.getElementById("setTds").value);
             }else{
                 set(ref(database, 'input/setTdsDown'), setTds)
                 .then(() => {console.log("Data berhasil dikirim:",database);})
-                .catch((error) => {console.error("Gagal mengirim data:", error);});  
+                .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         }    
     }
@@ -500,6 +623,8 @@ var setSuhu = parseFloat(document.getElementById("setSuhu").value);
                 set(ref(database, 'input/setSuhuUp'), setSuhu)
                 .then(() => {console.log("Data berhasil dikirim:", database);})
                 .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         }
     }else{
@@ -516,6 +641,8 @@ var setSuhu = parseFloat(document.getElementById("setSuhu").value);
                 set(ref(database, 'input/setSuhuDown'), setSuhu)
                 .then(() => {console.log("Data berhasil dikirim:",database);})
                 .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         } 
     }
@@ -538,6 +665,8 @@ function kirimDataKeFirebaseE() {
                 set(ref(database, 'input/setKelembabanUp'), setKelembaban)
                 .then(() => {console.log("Data berhasil dikirim:", database);})
                 .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         }
     }else{
@@ -554,6 +683,8 @@ function kirimDataKeFirebaseE() {
                 set(ref(database, 'input/setKelembabanDown'), setKelembaban)
                 .then(() => {console.log("Data berhasil dikirim:",database);})
                 .catch((error) => {console.error("Gagal mengirim data:", error);});
+                binaryOutput = getBinaryString();
+                set(ref(database, 'senddatafiks/all'), binaryOutput);
             }
         }
     }
